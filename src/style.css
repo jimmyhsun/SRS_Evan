@@ -25,6 +25,14 @@
   max-width: 100%;
   height: auto;
   margin: 0.5rem 0;
+  cursor: pointer;
+  transition: outline 0.15s;
+}
+
+.tiptap-editor .ProseMirror img.ProseMirror-selectednode {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .tiptap-editor .ProseMirror strong {
@@ -35,6 +43,88 @@
   font-style: italic;
 }
 
+/* TipTap table styles */
+.tiptap-editor .ProseMirror table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem 0;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
+.tiptap-editor .ProseMirror th,
+.tiptap-editor .ProseMirror td {
+  border: 1px solid #d1d5db;
+  padding: 0.5rem;
+  min-width: 80px;
+  vertical-align: top;
+  position: relative;
+}
+
+.tiptap-editor .ProseMirror th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+.tiptap-editor .ProseMirror .selectedCell {
+  background-color: #dbeafe;
+}
+
+/* Column resize handle */
+.tiptap-editor .ProseMirror .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #3b82f6;
+  cursor: col-resize;
+  z-index: 20;
+}
+
+.tiptap-editor .ProseMirror.resize-cursor {
+  cursor: col-resize;
+}
+
+/* Page break indicator line */
+.page-break-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 2px dashed #ef4444;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.page-break-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -6px;
+  height: 12px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 4px,
+    rgba(239, 68, 68, 0.08) 4px,
+    rgba(239, 68, 68, 0.08) 8px
+  );
+}
+
+.page-break-label {
+  position: absolute;
+  right: -70px;
+  top: -10px;
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
 /* Print styles */
 @page {
   margin: 10mm;
@@ -42,6 +132,12 @@
 }
 
 @media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
   body {
     background: white !important;
     margin: 0;
@@ -84,6 +180,12 @@
   /* Prevent page break inside table rows */
   tr {
     page-break-inside: avoid;
+  }
+
+  /* Allow page break inside the editor row (it can be long) */
+  tr:has(.tiptap-editor),
+  tr.editor-row {
+    page-break-inside: auto;
   }
 
   table {
