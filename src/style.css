@@ -199,4 +199,18 @@
   .tiptap-editor {
     border: none !important;
   }
+
+  .print-area {
+    background: white !important;
+    padding: 0 !important;
+  }
+
+  .print-page {
+    background: white !important;
+  }
+
+  .print-page > main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
 }

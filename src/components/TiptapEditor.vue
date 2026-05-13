@@ -10,6 +10,13 @@ import { Color } from '@tiptap/extension-color'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { ResizableImage } from '../extensions/ResizableImageExtension'
 
+// Expose getContent method for parent components
+function getContent(): string {
+  return editor.value?.getHTML() || ''
+}
+
+defineExpose({ getContent })
+
 const fileInput = ref<HTMLInputElement | null>(null)
 const showTableDialog = ref(false)
 const tableRows = ref(3)
