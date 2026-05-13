@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* TipTap editor styles */
+.tiptap-editor .ProseMirror {
+  min-height: 150px;
+  padding: 1rem;
+  outline: none;
+}
+
+.tiptap-editor .ProseMirror p {
+  margin: 0.5em 0;
+}
+
+.tiptap-editor .ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.tiptap-editor .ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+.tiptap-editor .ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  margin: 0.5rem 0;
+}
+
+.tiptap-editor .ProseMirror strong {
+  font-weight: bold;
+}
+
+.tiptap-editor .ProseMirror em {
+  font-style: italic;
+}
+
+/* Print styles */
+@page {
+  margin: 10mm;
+  size: A4;
+}
+
+@media print {
+  body {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-container {
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Show plain text for inputs and selects */
+  input,
+  select {
+    border: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  select {
+    pointer-events: none;
+  }
+
+  /* Hide date picker icon in print */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
+
+  /* Prevent page break inside table rows */
+  tr {
+    page-break-inside: avoid;
+  }
+
+  table {
+    page-break-inside: auto;
+  }
+
+  .tiptap-toolbar {
+    display: none !important;
+  }
+
+  .tiptap-editor {
+    border: none !important;
+  }
+}
